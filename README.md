@@ -1,2 +1,0 @@
-# HelloJava
-Java basic learning
