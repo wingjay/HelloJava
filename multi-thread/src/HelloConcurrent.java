@@ -1,5 +1,5 @@
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 
 /**
  * Concurrent library learning
@@ -7,91 +7,125 @@ import java.util.concurrent.CountDownLatch;
 public class HelloConcurrent {
 
     public static void main(String[] args) {
-//        testCountDownLatch();
-        exampleOfRunners();
+//        runDAfterABC();
+
+        runABCWhenAllReady();
+
+//        doTaskWithResultInWorker();
     }
 
-    private static void testCountDownLatch() {
-        // wait all workers finish their job first
-        int worker = 10;
-        CountDownLatch countDownLatch = new CountDownLatch(worker);
+    private static void doTaskWithResultInWorker() {
+        //创建线程池
+        ExecutorService executor = Executors.newCachedThreadPool();
 
-        for (int i=0; i<worker; i++) {
-            final int index = i;
+        Callable<Integer> callable = new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                System.out.println("Task starts");
+                Thread.sleep(1000);
+                int result = 0;
+                for (int i=0; i<=100; i++) {
+                    result += i;
+                }
+                System.out.println("Task finished and return result");
+                return result;
+            }
+        };
+
+        FutureTask<Integer> futureTask = new FutureTask<Integer>(callable) {
+            @Override
+            protected void done() {
+                System.out.println("Before futureTask.get(). ThreadName: " + Thread.currentThread().getName());
+                try {
+                    System.out.println("Result: " + get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("After futureTask.get()");
+            }
+        };
+        executor.submit(futureTask);
+        executor.shutdown();
+        System.out.println("End of main thread. ThreadName: " + Thread.currentThread().getName());
+    }
+
+
+    /**
+     * A B C starts running when all three are ready.
+     */
+    private static void runABCWhenAllReady() {
+        int runner = 3;
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(runner);
+
+        final Random random = new Random();
+        for (char runnerName='A'; runnerName <= 'C'; runnerName++) {
+            final String rN = String.valueOf(runnerName);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("worker " + index + " is working ");
+                    long prepareTime = random.nextInt(10000) + 100;
+                    System.out.println(rN + " is preparing for time: " + prepareTime);
+                    try {
+                        Thread.sleep(prepareTime);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        System.out.println(rN + " is prepared, waiting for others");
+                        cyclicBarrier.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (BrokenBarrierException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println(rN + " starts running");
+                }
+            }).start();
+        }
+    }
+
+    /**
+     * Only if A, B, C are all finished, D starts working
+     */
+    private static void runDAfterABC() {
+        int worker = 3;
+        CountDownLatch countDownLatch = new CountDownLatch(worker);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("D is waiting for other three threads");
+                try {
+                    countDownLatch.await();
+                    System.out.println("All done, D starts working");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
+        for (char threadName='A'; threadName <= 'C'; threadName++) {
+            final String tN = String.valueOf(threadName);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(tN + " is working");
                     try {
                         Thread.sleep(100);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                    System.out.println("worker " + index + " finishes job, current count: " + countDownLatch.getCount());
+                    System.out.println(tN + " finished");
                     countDownLatch.countDown();
                 }
             }).start();
         }
-
-        try {
-            countDownLatch.await();
-            System.out.println("Hey! All workers finished their job");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
-    private static void exampleOfRunners() {
-        // 5 runners -> 5 thread
-        // 1 referee -> main thread
-
-        // runners getting ready
-        // runners are ready
-        // referee starts
-        // runners start run
-        Random RANDOM = new Random();
-        int RUNNER_NUMBER = 5;
-        CountDownLatch prepareLatch = new CountDownLatch(RUNNER_NUMBER);
-        CountDownLatch startLatch = new CountDownLatch(1);
-
-        for (int i=0; i<RUNNER_NUMBER; i++) {
-            final int index = i+1;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    int preparingTime = RANDOM.nextInt(1000);
-                    System.out.println("Runner " + index + " is preparing, needs time: " + preparingTime);
-
-                    try {
-                        Thread.sleep(preparingTime);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.println("Runner " + index + " is Ready");
-                    prepareLatch.countDown();
-
-                    try {
-                        startLatch.await();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.println("Runner " + index + " starts run");
-                }
-            }).start();
-        }
-
-        try {
-            prepareLatch.await();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("All runners are ready, GO!");
-        startLatch.countDown();
-    }
-
 
 }
