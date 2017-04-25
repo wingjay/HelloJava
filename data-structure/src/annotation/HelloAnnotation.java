@@ -1,6 +1,7 @@
 package annotation;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 /**
@@ -9,46 +10,15 @@ import java.util.HashMap;
 public class HelloAnnotation {
 
     public static void main(String[] args) {
-        System.out.println(args.length);
-        for (int i=0; i<args.length; i++) {
-            System.out.println(args[i]);
-        }
+//        System.out.println(objectToMap(new UserBean("Jay", 100, 19921103)));
 
-//        FruitUtil.printFruitInfo(Apple.class);
-
-//        System.out.println(ClassToMap(UserBean.class));
-
-//        printObject(new UserBean("Jay", 100, 19921103));
-
-        System.out.println(objectToMap(new UserBean("Jay", 100, 19921103)));
+        UserBean userBean = new UserBean("Jay", 100, 19921103);
+        doTest(userBean);
     }
 
-    private static HashMap<String, String> ClassToMap(Class<?> clazz) {
-        HashMap<String, String> result = new HashMap<>();
-
-        for (Field field : clazz.getFields()) {
-            if (field.isAnnotationPresent(SerializedName.class)) {
-                SerializedName serializedName = field.getAnnotation(SerializedName.class);
-                result.put(serializedName.value(), field.getName());
-            }
-        }
-
-        return result;
-    }
-
-    @Deprecated
-    private static void printObject(Object object) {
-        System.out.println("Print object directly");
-        for (Field field : object.getClass().getDeclaredFields()) {
-            field.setAccessible(true);
-            try {
-                System.out.println("field: " + field.getName() + "; value: " + field.get(object).toString());
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
+    /**
+     * Convert Object to HashMap, key is Annotation value
+     */
     private static HashMap<String, Object> objectToMap(Object object) {
         HashMap<String, Object> map = new HashMap<>();
 
@@ -72,6 +42,28 @@ public class HelloAnnotation {
         }
 
         return map;
+    }
+
+    /**
+     * Test methods which are be annotated with @Test
+     */
+    private static void doTest(Object object) {
+        int pass = 0;
+        int fail = 0;
+        Method[] methods = object.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(Test.class)) {
+                try {
+                    method.invoke(object);
+                    pass++;
+                } catch (Exception e) {
+                    fail++;
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.printf("Test Pass Result: %s/%s", pass, pass+fail);
     }
 
 }

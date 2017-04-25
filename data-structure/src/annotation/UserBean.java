@@ -19,4 +19,24 @@ public class UserBean {
         this.id = id;
         this.birthday = birthday;
     }
+
+    @Test
+    public String getName() {
+        return name;
+    }
+
+    @Test
+    public double getId() {
+        return id;
+    }
+
+    @Test
+    public int getBirthday() {
+        return birthday;
+    }
+
+    @Test
+    public void testFailure() {
+        throw new RuntimeException("aaa");
+    }
 }
