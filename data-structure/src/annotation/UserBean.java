@@ -1,42 +1,40 @@
 package annotation;
 
-/**
- * Created by Jay on 4/21/17.
- */
+import reflection.Invoke;
+
 public class UserBean {
 
     @SerializedName("user_name")
-    private String name;
+    public String userName;
 
     @SerializedName("user_id")
-    private double id;
+    private long userId;
 
-    @SerializedName("user_birthday")
-    private int birthday;
-
-    UserBean(String name, double id, int birthday) {
-        this.name = name;
-        this.id = id;
-        this.birthday = birthday;
+    public UserBean(String userName, long userId) {
+        this.userName = userName;
+        this.userId = userId;
     }
 
-    @Test
     public String getName() {
-        return name;
+        return userName;
     }
 
-    @Test
-    public double getId() {
-        return id;
+    public long getId() {
+        return userId;
     }
 
-    @Test
-    public int getBirthday() {
-        return birthday;
+    @Invoke
+    public static void staticMethod(String devName) {
+        System.out.printf("Hi %s, I'm a static method\n", devName);
     }
 
-    @Test
-    public void testFailure() {
-        throw new RuntimeException("aaa");
+    @Invoke
+    public void publicMethod() {
+        System.out.println("I'm a public method\n");
+    }
+
+    @Invoke
+    private void privateMethod() {
+        System.out.println("I'm a private method\n");
     }
 }

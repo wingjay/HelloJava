@@ -13,9 +13,8 @@ public class HelloReflection {
     public static void main(String[] args) {
 //        printClass(UserBean.class);
 
-//        printClass("annotation.UserBean");
-
-        invokeMethod();
+        printClass(UserBean.class);
+//        invokeMethod();
     }
 
 

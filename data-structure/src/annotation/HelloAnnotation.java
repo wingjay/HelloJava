@@ -12,7 +12,7 @@ public class HelloAnnotation {
     public static void main(String[] args) {
 //        System.out.println(objectToMap(new UserBean("Jay", 100, 19921103)));
 
-        UserBean userBean = new UserBean("Jay", 100, 19921103);
+        UserBean userBean = new UserBean("Jay", 100);
         doTest(userBean);
     }
 
