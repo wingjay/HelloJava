@@ -2,20 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e576cf3f-cde6-43fa-bd24-29c6ac45a726" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloProducerConsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/effective-java/src/equals_hashcode/PhoneNumber.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloThreadLocal.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/effective-java/src/equals_hashcode/PhoneNumberWithoutHashcode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloConcurrent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/HelloSingleInstance.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/SingleEnum.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/effective-java/src/equals_hashcode/HelloEqualsHashcode.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/SingleElvis.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloVolatile.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/Singleton.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/SingleJay.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloVolatile.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloConcurrent.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/BadSingleInstance.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/SingleJay.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloThreadLocal.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/SingleEnum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/effective-java/src/equals_hashcode/PhoneNumber.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/HelloBuilder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/design-pattern/src/singleton/HelloSingleInstance.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/effective-java/src/equals_hashcode/PhoneNumberWithoutHashcode.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multi-thread/src/HelloProducerConsumer.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,16 +30,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SuppressWarnings.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_72.jdk/Contents/Home/src.zip!/java/lang/SuppressWarnings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="66" column="66" lean-forward="false" selection-start-line="66" selection-start-column="66" selection-end-line="66" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data-structure/src/reflection/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -83,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/compile/Generator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -96,8 +86,18 @@
       <file leaf-file-name="HelloRuntimeAnnotation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/runtime/HelloRuntimeAnnotation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="91" selection-end-column="5" />
+            <state relative-caret-position="673">
+              <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HelloReflection.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data-structure/src/reflection/HelloReflection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -261,8 +261,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -342,26 +340,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data-structure" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="annotation" />
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
@@ -728,10 +720,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5674699" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5674699" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19527897" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1981402" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -768,13 +760,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/Product.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_72.jdk/Contents/Home/src.zip!/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -844,41 +830,11 @@
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/FruitName.java" />
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/FruitColor.java" />
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/FruitUtil.java" />
-    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/KFCStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/Meal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/MealFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/Pizza.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/FactoryProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="56" column="46" lean-forward="true" selection-start-line="56" selection-start-column="46" selection-end-line="56" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/KFCStore.java" />
+    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/Meal.java" />
+    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/MealFactory.java" />
+    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/Pizza.java" />
+    <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/mealFactoryExam/FactoryProcessor.java" />
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/GeneratorProcessor.java" />
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/Generator.java" />
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/compile/UserBean.java">
@@ -973,9 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="55" column="11" lean-forward="false" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#1106#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1047,8 +1000,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data-structure/src/annotation/runtime/HelloRuntimeAnnotation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="91" selection-end-column="5" />
+        <state relative-caret-position="673">
+          <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1141,7 +1094,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>data-structure</last-edited>
+          <last-edited>common</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
