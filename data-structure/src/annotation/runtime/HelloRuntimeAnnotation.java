@@ -1,19 +1,33 @@
-package annotation;
+package annotation.runtime;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
 /**
  * Created by Jay on 4/21/17.
  */
-public class HelloAnnotation {
+public class HelloRuntimeAnnotation {
 
     public static void main(String[] args) {
-//        System.out.println(objectToMap(new UserBean("Jay", 100, 19921103)));
-
         UserBean userBean = new UserBean("Jay", 100);
+//        printAlias(userBean);
+//        System.out.println(objectToMap(userBean));
+//
         doTest(userBean);
+    }
+
+    /**
+     * print alias during runtime
+     */
+    private static void printAlias(Object userBeanObject) {
+        for (Field field : userBeanObject.getClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(Alias.class)) {
+                Alias alias = field.getAnnotation(Alias.class);
+                System.out.println(alias.value());
+            }
+        }
     }
 
     /**
@@ -24,8 +38,8 @@ public class HelloAnnotation {
 
         for (Field field : object.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            if (field.isAnnotationPresent(SerializedName.class)) {
-                SerializedName serializedName = field.getAnnotation(SerializedName.class);
+            if (field.isAnnotationPresent(Alias.class)) {
+                Alias alia = field.getAnnotation(Alias.class);
                 try {
                     if (field.getType() == int.class) {
                         System.out.printf("field: %s is int type \n", field.getName());
@@ -34,7 +48,7 @@ public class HelloAnnotation {
                     } else if (field.getType() == String.class || field.getType() == long.class) {
                         System.out.printf("fields: %s is String/long type \n", field.getName());
                     }
-                    map.put(serializedName.value(), field.get(object));
+                    map.put(alia.value(), field.get(object));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
@@ -48,22 +62,33 @@ public class HelloAnnotation {
      * Test methods which are be annotated with @Test
      */
     private static void doTest(Object object) {
-        int pass = 0;
-        int fail = 0;
         Method[] methods = object.getClass().getDeclaredMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(Test.class)) {
+                Test test = method.getAnnotation(Test.class);
                 try {
-                    method.invoke(object);
-                    pass++;
+                    String methodName = test.value().length() == 0 ? method.getName() : test.value();
+                    System.out.printf("Testing. methodName: %s, id: %s\n", methodName, test.id());
+
+                    // static method
+                    if (Modifier.isStatic(method.getModifiers())) {
+                        method.invoke(null);
+                    } else if (Modifier.isPrivate(method.getModifiers())) {
+                        // private method
+                        method.setAccessible(true);
+                        method.invoke(object);
+                    } else {
+                        // public method
+                        method.invoke(object);
+                    }
+
+                    System.out.printf("PASS: Method id: %s\n", test.id());
                 } catch (Exception e) {
-                    fail++;
+                    System.out.printf("FAIL: Method id: %s\n", test.id());
                     e.printStackTrace();
                 }
             }
         }
-
-        System.out.printf("Test Pass Result: %s/%s", pass, pass+fail);
     }
 
 }

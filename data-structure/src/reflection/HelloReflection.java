@@ -1,6 +1,6 @@
 package reflection;
 
-import annotation.UserBean;
+import annotation.runtime.UserBean;
 
 import java.lang.reflect.*;
 
