@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
  * Created by Jay on 5/3/17.
  */
 @Retention(RetentionPolicy.CLASS)
-@Target({ElementType.CONSTRUCTOR, ElementType.FIELD})
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE, ElementType.METHOD})
 public @interface Generator {
 }

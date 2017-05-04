@@ -13,7 +13,13 @@ public class HelloReflection {
     public static void main(String[] args) {
 //        printClass(UserBean.class);
 
-        printClass(UserBean.class);
+
+        try {
+            Class clazz = Class.forName("annotation.runtime.UserBean");
+            printClass(clazz);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 //        invokeMethod();
     }
 
