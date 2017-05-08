@@ -13,4 +13,9 @@ public class MusicPlayer2 {
         System.out.printf("end play music");
     }
 
+    private MusicPlayer2 instance;
+    public void setMusicPlayer2(Object musicPlayer2) {
+        this.instance = (MusicPlayer2) musicPlayer2;
+    }
+
 }
