@@ -116,11 +116,13 @@ public class HelloClassLoader {
     }
 
     private static void loadClass() throws ClassNotFoundException {
-        Class<?> clazz2 = Class.forName("classloader.MusicPlayer2");
-        System.out.println(clazz2.getClassLoader());
-
-        Class<?> clazz1 = Class.forName("classloader.MusicPlayer");
+        ClassLoader appClassLoader = ClassLoader.getSystemClassLoader();
+        Class<?> clazz1 = appClassLoader.loadClass("classloader.MusicPlayer");
         System.out.println(clazz1.getClassLoader());
+
+        Class<?> clazz2 = Class.forName("classloader.MusicPlayer2");
+        ClassLoader classLoader = clazz2.getClassLoader();
+        System.out.println(classLoader);
 
         Class<?> clazz3 = Class.forName("java.lang.String");
         System.out.println(clazz3.getClassLoader());

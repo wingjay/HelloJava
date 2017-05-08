@@ -12,7 +12,7 @@ public class NetworkClassLoader extends ClassLoader {
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classData = getClassData(name);
+        byte[] classData = downloadClassData(name);
         if (classData == null) {
             super.findClass(name);
         } else {
@@ -21,7 +21,7 @@ public class NetworkClassLoader extends ClassLoader {
         return null;
     }
 
-    private byte[] getClassData(String name) {
+    private byte[] downloadClassData(String name) {
         String path = "http://localhost" + File.separatorChar + "java" + File.separatorChar + name.replace('.', File.separatorChar) + ".class";
         System.out.printf("localPath: %s\n", path);
 
