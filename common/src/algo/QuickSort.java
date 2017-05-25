@@ -1,7 +1,8 @@
 package algo;
 
 /**
- * 先排好最后一个数
+ * 先排好最后一个数的位置
+ * 递归
  */
 public class QuickSort {
 
