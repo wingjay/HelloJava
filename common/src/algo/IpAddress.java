@@ -27,8 +27,13 @@ public class IpAddress {
         int currentNumber = 0;
         long result = 0;
 
-        for (int i=ipAddress.length() - 1; i >= 0; i--) {
-            char value = ipAddress.charAt(i);
+        for (int i=ipAddress.length() - 1; i >= -1; i--) {
+            char value;
+            if (i == -1) {
+                value = '.';
+            } else {
+                value = ipAddress.charAt(i);
+            }
             if ('0' <= value && value <= '9') {
                 currentNumber += (value - '0') * (Math.pow(10, tenPow));
                 tenPow++;
@@ -50,12 +55,12 @@ public class IpAddress {
             }
         }
 
-        return result + _pow(currentNumber, pow);
+        return result;
     }
 
     private static void unitTest() {
-        String[] ipList = {"0.0.0.0", "192.168.50.10", " 192 . 168 . 50 . 10 ", "192.16 8.50.10", "192.168.50.1 0", "192.168.255.10", "192.168.256.10"};
-        String[] resultList = {"0", "3232248330", "3232248330", "reportError", "reportError", "3232300810", "reportError"};
+        String[] ipList = {"0.0.0.0", "192.168.50.10", " 192 . 168 . 50 . 10 ", "192.16 8.50.10", "192.168.50.1 0", "192.168.255.10", "192.168.256.10", "256.168.255.10"};
+        String[] resultList = {"0", "3232248330", "3232248330", "reportError", "reportError", "3232300810", "reportError", "reportError"};
         for (int i=0; i<ipList.length; i++) {
             System.out.println("Input: " + ipList[i]);
             try {
