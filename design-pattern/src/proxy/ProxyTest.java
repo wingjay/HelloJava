@@ -1,5 +1,11 @@
 package proxy;
 
+import proxy.calculator.CalculatorFactory;
+import proxy.calculator.ICalculator;
+import proxy.httpRecorder.HttpLogger;
+import proxy.httpRecorder.IHandler;
+import proxy.httpRecorder.RequestHandler;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
@@ -11,8 +17,22 @@ import java.util.Map;
 public class ProxyTest {
 
     public static void main(String[] args) {
+        testHttpLogging(new RequestHandler.Request("https://google.com", "key=value"));
+        testHttpLogging(new RequestHandler.Request("https://baidu.com", "key2=value2"));
 //        testISubject();
-        testMap();
+//        testMap();
+    }
+
+    private static void testHttpLogging(RequestHandler.Request request) {
+        IHandler handler = (IHandler) Proxy.newProxyInstance(
+                ProxyTest.class.getClassLoader(),
+                new Class[]{IHandler.class},
+                new HttpLogger(new RequestHandler()));
+        handler.handle(request);
+    }
+    private static void testCalculator() {
+        ICalculator c = CalculatorFactory.provideCalculator();
+        c.calculate();
     }
 
     private static void testMap() {
@@ -26,12 +46,10 @@ public class ProxyTest {
     }
 
     private static void testISubject() {
-        RealSubject realSubject = new RealSubject();
-        InvocationHandler proxy = new MethodTimingProxy(realSubject);
+        InvocationHandler proxy = new MethodTimingProxy(new RealSubject());
 
-        Class clazz = realSubject.getClass();
-        ISubject iSubject = (ISubject) Proxy.newProxyInstance(clazz.getClassLoader(),
-                clazz.getInterfaces(), proxy);
+        ISubject iSubject = (ISubject) Proxy.newProxyInstance(ProxyTest.class.getClassLoader(),
+                new Class[]{ ISubject.class }, proxy);
         iSubject.request();
         iSubject.asyncRequest("xiami.com");
     }
