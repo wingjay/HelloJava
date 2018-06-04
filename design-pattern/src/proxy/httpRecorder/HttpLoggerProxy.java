@@ -2,16 +2,20 @@ package proxy.httpRecorder;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * Created by wingjay on 31/01/2018.
  */
-public class HttpLogger implements InvocationHandler {
+public class HttpLoggerProxy implements InvocationHandler {
     private Object target;
-    public HttpLogger(Object o) {
-        this.target = o;
-    }
 
+    public Object bind(Object o) {
+        this.target = o;
+        return Proxy.newProxyInstance(o.getClass().getClassLoader(),
+                o.getClass().getInterfaces(),
+                this);
+    }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (method.getName().equals("handle")

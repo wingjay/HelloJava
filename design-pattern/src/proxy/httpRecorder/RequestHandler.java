@@ -7,7 +7,7 @@ public class RequestHandler implements IHandler {
 
     @Override
     public Response handle(Request request) {
-        System.out.println("Parse request...");
+        System.out.println("Parse doA...");
         System.out.println("Read database...");
         System.out.println("Assemble result...");
         return new Response(200, "PersonJson");

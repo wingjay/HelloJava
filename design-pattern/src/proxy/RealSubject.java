@@ -3,21 +3,19 @@ package proxy;
 /**
  * Created by wingjay on 06/11/2017.
  */
-public class RealSubject implements ISubject {
+public class RealSubject implements ISubject, ISecondSubject {
     @Override
-    public void request() {
-        System.out.println("RealSubject request");
+    public void doA() {
+        System.out.println("RealSubject doA");
     }
 
     @Override
-    public void asyncRequest(String url) {
-        System.out.println("Ready for async request: " + url);
-        try {
-            Thread.sleep(1000);
-            System.out.println("Finish async request: " + url);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void doB(String url) {
+        System.out.println("RealSubject doB");
+    }
 
+    @Override
+    public void doC() {
+        System.out.println("RealSubject doC");
     }
 }

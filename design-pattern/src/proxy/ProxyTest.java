@@ -1,13 +1,9 @@
 package proxy;
 
-import proxy.calculator.CalculatorFactory;
-import proxy.calculator.ICalculator;
-import proxy.httpRecorder.HttpLogger;
+import proxy.httpRecorder.HttpLoggerProxy;
 import proxy.httpRecorder.IHandler;
 import proxy.httpRecorder.RequestHandler;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,40 +13,29 @@ import java.util.Map;
 public class ProxyTest {
 
     public static void main(String[] args) {
-        testHttpLogging(new RequestHandler.Request("https://google.com", "key=value"));
-        testHttpLogging(new RequestHandler.Request("https://baidu.com", "key2=value2"));
-//        testISubject();
+        System.getProperties().setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+        testISubject();
 //        testMap();
+//        testHttpLogging(new RequestHandler.Request("https://google.com", "key=value"));
+//        testHttpLogging(new RequestHandler.Request("https://baidu.com", "key2=value2"));
     }
 
-    private static void testHttpLogging(RequestHandler.Request request) {
-        IHandler handler = (IHandler) Proxy.newProxyInstance(
-                ProxyTest.class.getClassLoader(),
-                new Class[]{IHandler.class},
-                new HttpLogger(new RequestHandler()));
-        handler.handle(request);
-    }
-    private static void testCalculator() {
-        ICalculator c = CalculatorFactory.provideCalculator();
-        c.calculate();
+    private static void testISubject() {
+        ISubject iSubject = (ISubject) new MethodTimingProxy().bind(new RealSubject());
+        iSubject.doA();
     }
 
     private static void testMap() {
-        Map map = (Map) Proxy.newProxyInstance(ProxyTest.class.getClassLoader(),
-                new Class[] { Map.class }, new MethodTimingProxy(new HashMap<>()));
-
+        Map map = (Map) new MethodTimingProxy().bind(new HashMap<>());
         map.put("First", "1");
         map.put("Second", "2");
         System.out.println(map.get("First"));
         System.out.println(map.get("Second"));
     }
 
-    private static void testISubject() {
-        InvocationHandler proxy = new MethodTimingProxy(new RealSubject());
-
-        ISubject iSubject = (ISubject) Proxy.newProxyInstance(ProxyTest.class.getClassLoader(),
-                new Class[]{ ISubject.class }, proxy);
-        iSubject.request();
-        iSubject.asyncRequest("xiami.com");
+    private static void testHttpLogging(RequestHandler.Request request) {
+        IHandler handler = (IHandler) new HttpLoggerProxy().bind(new RequestHandler());
+        handler.handle(request);
     }
+
 }
